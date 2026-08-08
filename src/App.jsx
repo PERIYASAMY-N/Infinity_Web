@@ -4,6 +4,7 @@ import "./App.css";
 // Components
 import Navbar from "./components/Navbar";
 import CanvasBackground from "./components/CanvasBackground";
+import BackToTop from "./components/BackToTop";
 
 // Sections
 import Hero from "./sections/Hero";
@@ -171,6 +172,9 @@ export default function App() {
           <p className="designed-by">Built with React.js & Pure CSS</p>
         </div>
       </footer>
+
+      {/* Floating Back to Top Button */}
+      <BackToTop />
     </>
   );
 }

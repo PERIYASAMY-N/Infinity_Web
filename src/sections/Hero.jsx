@@ -82,7 +82,7 @@ export default function Hero() {
             </a>
             
             <a
-              href="/assets/documents/Periyasamy_N_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}assets/documents/Periyasamy_N_Resume.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline"
