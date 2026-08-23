@@ -1,104 +1,63 @@
-import React, { useState } from "react";
-import { profile } from "../data/profileData";
-import Modal from "../components/UI/Modal";
-import { Milestone, Award, Calendar, CircleUser } from "lucide-react";
+import React from 'react';
+import SectionHeading from '../components/SectionHeading';
+import { certifications } from '../data/portfolioData';
+import { Award, ExternalLink } from 'lucide-react';
 
-export default function Certifications() {
-  const [selectedCert, setSelectedCert] = useState(null);
-
-  const getBadgeColor = (title) => {
-    if (title.toLowerCase().includes("gold")) {
-      return "medal-gold";
-    }
-    return "medal-silver";
-  };
-
+const Certifications = () => {
   return (
-    <section id="certifications" className="certifications-section">
-      <div className="container">
+    <section id="certifications" className="py-20 bg-dark-900 border-t border-dark-800">
+      <div className="container mx-auto px-6 md:px-12">
+        <SectionHeading 
+          title="My Certifications" 
+          subtitle="Credentials" 
+        />
         
-        {/* Section Header */}
-        <div className="section-header">
-          <span className="section-pre">Credentials</span>
-          <h2 className="section-title">NPTEL Certifications</h2>
-          <div className="section-underline" />
-        </div>
+        <p className="text-gray-400 mb-12 max-w-2xl">
+          Verified achievements
+        </p>
 
-        {/* Certification Cards Grid */}
-        <div className="certifications-grid">
-          {profile.certifications.map((cert) => (
-            <div key={cert.id} className="certification-card">
-              <div className="cert-header-layout">
-                <div className="cert-icon-wrapper">
-                  <Award size={32} className={cert.grade.includes("Gold") ? "gold-aw" : "silver-aw"} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {certifications.map((cert) => (
+            <div key={cert.id} className="clean-card p-6 flex flex-col h-full">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-dark-900 rounded-md border border-dark-700 text-accent-DEFAULT">
+                  <Award size={24} />
                 </div>
-                
-                <span className={`cert-medal-pill ${getBadgeColor(cert.grade)}`}>
-                  {cert.grade}
-                </span>
+                {cert.badge && (
+                  <span className="inline-block px-3 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-semibold text-gray-300">
+                    {cert.badge}
+                  </span>
+                )}
               </div>
-
-              <h3>{cert.title}</h3>
-              <h4>{cert.issuer}</h4>
-
-              <div className="cert-meta">
-                <Calendar size={14} /> Completed {cert.date}
+              
+              <h3 className="text-lg font-bold text-white mb-2 leading-snug">
+                {cert.title}
+              </h3>
+              
+              <p className="text-gray-400 text-sm mb-4">
+                {cert.issuer}
+              </p>
+              
+              <div className="mt-auto pt-4 border-t border-dark-700 flex justify-between items-center">
+                <span className="text-sm font-medium text-gray-500">{cert.year}</span>
+                {cert.link && (
+                  <a 
+                    href={cert.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-sm text-accent-DEFAULT hover:text-accent-light transition-colors"
+                  >
+                    <span>View</span>
+                    <ExternalLink size={14} />
+                  </a>
+                )}
               </div>
-
-              <p className="cert-summary-text">{cert.description.slice(0, 75)}...</p>
-
-              <button
-                onClick={() => setSelectedCert(cert)}
-                className="btn-cert-verify"
-              >
-                View Credential details
-              </button>
             </div>
           ))}
         </div>
-
-        {/* Modal Verification Preview */}
-        <Modal
-          isOpen={selectedCert !== null}
-          onClose={() => setSelectedCert(null)}
-          title="Digital Certificate Info"
-        >
-          {selectedCert && (
-            <div className="cert-verification-modal-view">
-              <div className="cert-badge-frame">
-                <Award size={64} className={selectedCert.grade.includes("Gold") ? "gold-badge-svg" : "silver-badge-svg"} />
-                <h3>{selectedCert.grade}</h3>
-                <span className="issuer">{selectedCert.issuer}</span>
-              </div>
-
-              <div className="cert-details-block">
-                <h4>{selectedCert.title}</h4>
-                <p>{selectedCert.description}</p>
-
-                <div className="cert-timeline-info">
-                  <div className="info-row">
-                    <Milestone size={16} />
-                    <span><strong>Platform:</strong> National Programme on Technology Enhanced Learning (IIT)</span>
-                  </div>
-                  <div className="info-row">
-                    <Calendar size={16} />
-                    <span><strong>Year:</strong> {selectedCert.date}</span>
-                  </div>
-                  <div className="info-row">
-                    <CircleUser size={16} />
-                    <span><strong>Candidate:</strong> {profile.name}</span>
-                  </div>
-                </div>
-
-                <div className="cert-verification-notice">
-                  <p>Verified through IIT evaluator board under candidate ID mapping.</p>
-                </div>
-              </div>
-            </div>
-          )}
-        </Modal>
-
       </div>
     </section>
   );
-}
+};
+
+export default Certifications;

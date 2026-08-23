@@ -1,48 +1,46 @@
-import React from "react";
-import { profile } from "../data/profileData";
-import { GraduationCap, Award, Calendar } from "lucide-react";
+import React from 'react';
+import SectionHeading from '../components/SectionHeading';
+import { education } from '../data/portfolioData';
 
-export default function Education() {
+const Education = () => {
   return (
-    <section id="education" className="education-section">
-      <div className="container">
+    <section id="education" className="py-20 bg-dark-900 border-t border-dark-800">
+      <div className="container mx-auto px-6 md:px-12">
+        <SectionHeading 
+          title="My Education" 
+          subtitle="Academic Background" 
+        />
         
-        {/* Section Header */}
-        <div className="section-header">
-          <span className="section-pre">Qualifications</span>
-          <h2 className="section-title">Educational Foundation</h2>
-          <div className="section-underline" />
-        </div>
+        <p className="text-gray-400 mb-12 max-w-2xl">
+          My learning journey
+        </p>
 
-        {/* Education Panels Grid */}
-        <div className="education-grid">
-          {profile.education.map((edu, number) => (
-            <div key={number} className="education-card">
-              <div className="education-card-icon">
-                <GraduationCap size={28} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {education.map((edu, index) => (
+            <div key={index} className="clean-card p-6 md:p-8">
+              <div className="flex flex-col mb-4">
+                <span className="text-sm font-medium text-gray-500 mb-2">
+                  {edu.duration}
+                </span>
+                <h3 className="text-xl font-bold text-white mb-1">
+                  {edu.institution}
+                </h3>
+                <p className="text-accent-DEFAULT font-medium">
+                  {edu.degree}
+                </p>
               </div>
-
-              <div className="education-card-body">
-                {/* Meta details */}
-                <div className="education-meta">
-                  <span className="edu-duration">
-                    <Calendar size={14} /> {edu.duration}
-                  </span>
-                  
-                  <span className="edu-grade">
-                    <Award size={14} /> {edu.grade}
-                  </span>
-                </div>
-
-                <h3 className="edu-degree">{edu.degree}</h3>
-                <h4 className="edu-institution">{edu.institution}</h4>
-                <p className="edu-description">{edu.description}</p>
+              
+              <div className="pt-4 mt-2 border-t border-dark-700">
+                <p className="text-gray-400 text-sm">
+                  {edu.score}
+                </p>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
-}
+};
+
+export default Education;

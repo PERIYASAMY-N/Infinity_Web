@@ -1,146 +1,70 @@
-import React, { useState, useEffect } from "react";
-import { ArrowRight, FileDown, Mail } from "lucide-react";
+import React from 'react';
+import { personalInfo } from '../data/portfolioData';
 
-export default function Hero() {
-  const [taglineText, setTaglineText] = useState("");
-  const taglines = ["Building Intelligent Digital Experiences", "Integrating AI & Neural Systems", "Crafting High-Performance APIs"];
-  const [currentTaglineIndex, setCurrentTaglineIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [charIndex, setCharIndex] = useState(0);
+import profilePhoto from '../assets/profile-photo.jpg';
 
-  // Typing speed controllers
-  useEffect(() => {
-    let speed = isDeleting ? 30 : 70;
-    
-    // Pause on complete phrase
-    if (!isDeleting && charIndex === taglines[currentTaglineIndex].length) {
-      speed = 1800; // Pause showing the tagline
-      const timer = setTimeout(() => setIsDeleting(true), speed);
-      return () => clearTimeout(timer);
-    }
-    
-    // Switch to next phrase
-    if (isDeleting && charIndex === 0) {
-      setIsDeleting(false);
-      setCurrentTaglineIndex((prev) => (prev + 1) % taglines.length);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      setTaglineText(
-        isDeleting
-          ? taglines[currentTaglineIndex].substring(0, charIndex - 1)
-          : taglines[currentTaglineIndex].substring(0, charIndex + 1)
-      );
-      setCharIndex((prev) => (prev + (isDeleting ? -1 : 1)));
-    }, speed);
-
-    return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, currentTaglineIndex]);
-
-  const scrollToSection = (e, targetId) => {
-    e.preventDefault();
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      const topOffset = targetElement.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({
-        top: topOffset,
-        behavior: "smooth"
-      });
-    }
-  };
-
+const Hero = () => {
   return (
-    <section id="home" className="hero-section">
-      <div className="container hero-container">
-        
-        {/* Left Intro Text Block */}
-        <div className="hero-content">
-          <div className="hero-badge">Available for Internships & Projects</div>
-          
-          <h1 className="hero-name">
-            Hi, I'm <span className="text-gradient">Periyasamy N</span>
-          </h1>
-          
-          <h2 className="hero-headline">
-            {taglineText}
-            <span className="typing-cursor">|</span>
-          </h2>
-          
-          <p className="hero-description">
-            Information Technology student passionate about full-stack development, AI-powered systems, 
-            and solving real-world challenges through clean, scalable engineering solutions.
-          </p>
-
-          <div className="hero-ctas">
-            <a
-              href="#projects"
-              onClick={(e) => scrollToSection(e, "#projects")}
-              className="btn btn-primary"
-            >
-              View My Projects <ArrowRight size={16} />
-            </a>
-            
-            <a
-              href={`${import.meta.env.BASE_URL}assets/documents/Periyasamy_N_Resume.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline"
-            >
-              <FileDown size={16} /> View Resume
-            </a>
-            
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, "#contact")}
-              className="btn btn-ghost"
-            >
-              <Mail size={16} /> Contact Me
-            </a>
-          </div>
-
-          <div className="hero-tech-pills">
-            <span>React.js</span>
-            <span>Spring Boot</span>
-            <span>Node.js</span>
-            <span>Java</span>
-            <span>Python</span>
-            <span>MySQL</span>
-          </div>
-        </div>
-
-        {/* Right Developer Avatar/Profile Card */}
-        <div className="hero-visual">
-          <div className="developer-profile-card">
-            <div className="avatar-glow-ring" />
-            
-            <div className="avatar-circle">
-              <span className="avatar-initials">PN</span>
+    <section id="home" className="min-h-screen flex flex-col justify-center pt-24 pb-12 relative overflow-hidden bg-dark-900">
+      <div className="container mx-auto px-6 md:px-12 relative z-10 flex-grow flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+          {/* Left Column: Text Content */}
+          <div className="flex flex-col space-y-6 order-2 lg:order-1 max-w-2xl">
+            <div>
+              <p className="text-accent-DEFAULT font-medium mb-3 tracking-wide">
+                &#128075; Hello, I'm
+              </p>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-4">
+                {personalInfo.name.toUpperCase()}
+              </h1>
+              <h2 className="text-xl md:text-2xl text-gray-300 font-medium mb-6">
+                {personalInfo.role}
+              </h2>
             </div>
-
-            <div className="profile-details-card">
-              <h3>Periyasamy N</h3>
-              <p className="subtitle">Full-Stack Web Dev &amp; AI Enthusiast</p>
-              
-              <div className="profile-meta-grid">
-                <div className="meta-row">
-                  <span className="label">Focus</span>
-                  <span className="val">Spring Boot / React</span>
-                </div>
-                <div className="meta-row">
-                  <span className="label">Location</span>
-                  <span className="val">Palani, TN, India</span>
-                </div>
-                <div className="meta-row">
-                  <span className="label">Status</span>
-                  <span className="val">Seeking Internships</span>
-                </div>
-              </div>
+            
+            <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-8">
+              {personalInfo.heroText}
+            </p>
+            
+            <div className="flex flex-wrap items-center gap-4">
+              <a 
+                href="#projects"
+                className="px-6 py-3 bg-white text-dark-900 font-semibold rounded-md hover:bg-gray-200 transition-colors duration-300"
+              >
+                View Projects
+              </a>
+              <a 
+                href="/assets/documents/Periyasamy_N_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 border border-dark-600 text-white font-semibold rounded-md hover:bg-dark-800 transition-colors duration-300"
+              >
+                Download CV
+              </a>
             </div>
           </div>
+          
+          {/* Right Column: Profile Image */}
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-dark-800 shadow-xl bg-dark-800 flex items-center justify-center">
+               <img 
+                 src={profilePhoto} 
+                 alt="Periyasamy N" 
+                 className="w-full h-full object-cover"
+               />
+               
+               {/* Availability Badge */}
+               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-dark-900/80 backdrop-blur-sm border border-dark-600 px-4 py-2 rounded-full flex items-center gap-2">
+                 <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                 <span className="text-xs text-white font-medium">Available for Internships</span>
+               </div>
+            </div>
+          </div>
+          
         </div>
-
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

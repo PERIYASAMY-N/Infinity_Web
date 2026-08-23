@@ -1,54 +1,67 @@
-import React from "react";
-import { profile } from "../data/profileData";
-import { Terminal, Layout, Database, Bot, Wrench } from "lucide-react";
+import React from 'react';
+import SectionHeading from '../components/SectionHeading';
 
-export default function Skills() {
-  const categoryMeta = {
-    languages: { title: "Programming Languages", icon: <Terminal size={22} className="text-secondary" /> },
-    webTechnologies: { title: "Web Technologies", icon: <Layout size={22} className="text-secondary" /> },
-    databases: { title: "Databases", icon: <Database size={22} className="text-secondary" /> },
-    aiMl: { title: "AI / ML Concepts", icon: <Bot size={22} className="text-secondary" /> },
-    tools: { title: "Tools", icon: <Wrench size={22} className="text-secondary" /> }
-  };
+// Group skills by category based on user requirement
+const skillCategories = [
+  {
+    title: "Programming",
+    items: ["Java", "JavaScript", "Python", "SQL"]
+  },
+  {
+    title: "Frontend",
+    items: ["HTML5", "CSS3", "React.js", "Tailwind CSS"]
+  },
+  {
+    title: "Backend",
+    items: ["Node.js", "Express.js", "FastAPI"]
+  },
+  {
+    title: "Database",
+    items: ["MongoDB", "MySQL"]
+  },
+  {
+    title: "AI / ML",
+    items: ["NLP", "LLM Integration", "Computer Vision", "AI Applications"]
+  },
+  {
+    title: "Tools",
+    items: ["Git", "GitHub", "VS Code", "Postman"]
+  }
+];
 
+const Skills = () => {
   return (
-    <section id="skills" className="skills-section">
-      <div className="container">
+    <section id="skills" className="py-20 bg-dark-900 border-t border-dark-800">
+      <div className="container mx-auto px-6 md:px-12">
+        <SectionHeading 
+          title="My Skills" 
+          subtitle="What I Know" 
+        />
         
-        {/* Section Header */}
-        <div className="section-header">
-          <span className="section-pre">Capabilities</span>
-          <h2 className="section-title">My Technical Stack</h2>
-          <div className="section-underline" />
-        </div>
+        <p className="text-gray-400 mb-12 max-w-2xl">
+          Technologies I work with
+        </p>
 
-        {/* Skills Cards Grid */}
-        <div className="skills-grid">
-          {Object.entries(profile.skills).map(([key, list]) => {
-            const meta = categoryMeta[key] || { title: key, icon: <Terminal size={22} /> };
-            return (
-              <div key={key} className="skill-category-card">
-                {/* Header */}
-                <div className="skill-card-header">
-                  <div className="skill-category-icon">{meta.icon}</div>
-                  <h3>{meta.title}</h3>
-                </div>
-                
-                {/* Items Tag Cloud */}
-                <div className="skill-pills-grid">
-                  {list.map((skill, index) => (
-                    <div key={index} className="skill-pill-badge">
-                      <span className="skill-pill-dot" />
-                      <span className="skill-pill-name">{skill}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skillCategories.map((category, index) => (
+            <div key={index} className="clean-card p-6">
+              <h3 className="text-xl font-bold text-white mb-6 pb-4 border-b border-dark-700">
+                {category.title}
+              </h3>
+              <ul className="space-y-3">
+                {category.items.map((item, idx) => (
+                  <li key={idx} className="flex items-center text-gray-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-DEFAULT mr-3"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-
       </div>
     </section>
   );
-}
+};
+
+export default Skills;

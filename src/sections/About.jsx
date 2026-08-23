@@ -1,77 +1,139 @@
-import React from "react";
-import { profile } from "../data/profileData";
-import { Code2, Brain, CheckSquare, GraduationCap, MapPin } from "lucide-react";
+import React from 'react';
+import SectionHeading from '../components/SectionHeading';
+import { personalInfo } from '../data/portfolioData';
+import { Mail, Phone, MapPin, GraduationCap } from 'lucide-react';
 
-export default function About() {
-  const cards = [
-    {
-      icon: <Code2 size={24} className="card-icon-indigo" />,
-      title: "Full-Stack Development",
-      description: "Building responsive frontend templates in React and integrating robust APIs in Spring Boot and Node.js."
-    },
-    {
-      icon: <Brain size={24} className="card-icon-cyan" />,
-      title: "AI Integration",
-      description: "Incorporating chatbot channels, natural language processing engines, and computer vision trackers into web layers."
-    },
-    {
-      icon: <CheckSquare size={24} className="card-icon-indigo" />,
-      title: "Problem Solving",
-      description: "Approaching feature requirements logically, seeking optimal database indices and cleaning modular architectures."
-    },
-    {
-      icon: <GraduationCap size={24} className="card-icon-cyan" />,
-      title: "Continuous Learning",
-      description: "Enhancing skills through NPTEL certifications and hands-on project head roles at college."
-    }
-  ];
+import profilePhoto from '../assets/profile-photo.jpg';
 
+const About = () => {
   return (
-    <section id="about" className="about-section">
-      <div className="container">
+    <section id="about" className="py-20 bg-dark-900 border-t border-dark-800">
+      <div className="container mx-auto px-6 md:px-12">
+        <SectionHeading 
+          title="About Me" 
+          subtitle="Get To Know" 
+        />
         
-        {/* Section Title */}
-        <div className="section-header">
-          <span className="section-pre">About Me</span>
-          <h2 className="section-title">My Professional Journey</h2>
-          <div className="section-underline" />
-        </div>
-
-        {/* content split grid */}
-        <div className="about-grid">
-          
-          {/* Left Bio Details */}
-          <div className="about-bio-panel">
-            <h3>Who I Am & What I Drive For</h3>
-            {profile.bio.map((para, i) => (
-              <p key={i} className="about-paragraph">{para}</p>
-            ))}
-            
-            {/* Quick Profile Indicators */}
-            <div className="profile-metadata-pills">
-              <div className="meta-pill">
-                <MapPin size={16} /> <span>{profile.location}</span>
-              </div>
-              <div className="meta-pill">
-                <GraduationCap size={16} /> <span>VSB Engineering College (CGPA 8.79)</span>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-12">
+          {/* Left Column: Image */}
+          <div className="lg:col-span-4">
+            <div className="bg-dark-800 rounded-lg p-2 border border-dark-700 h-full flex flex-col justify-center items-center">
+               <div className="w-full aspect-square rounded-md overflow-hidden bg-dark-900 mb-6">
+                 <img 
+                   src={profilePhoto} 
+                   alt="Periyasamy N" 
+                   className="w-full h-full object-cover"
+                 />
+               </div>
+               
+               {/* Quick Stats */}
+               <div className="grid grid-cols-2 gap-4 w-full">
+                 <div className="bg-dark-900 p-4 rounded-md border border-dark-700 text-center">
+                   <h4 className="text-2xl font-bold text-white">6+</h4>
+                   <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider">Projects</p>
+                 </div>
+                 <div className="bg-dark-900 p-4 rounded-md border border-dark-700 text-center">
+                   <h4 className="text-2xl font-bold text-white">{personalInfo.cgpa.split('/')[0].trim()}</h4>
+                   <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider">CGPA</p>
+                 </div>
+                 <div className="bg-dark-900 p-4 rounded-md border border-dark-700 text-center">
+                   <h4 className="text-2xl font-bold text-white">2</h4>
+                   <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider">Internships</p>
+                 </div>
+                 <div className="bg-dark-900 p-4 rounded-md border border-dark-700 text-center">
+                   <h4 className="text-2xl font-bold text-white">90.66%</h4>
+                   <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider">HSC</p>
+                 </div>
+               </div>
             </div>
           </div>
-
-          {/* Right Highlights Cards */}
-          <div className="about-highlights-grid">
-            {cards.map((card, idx) => (
-              <div key={idx} className="about-highlight-card">
-                <div className="card-icon-wrapper">{card.icon}</div>
-                <h4>{card.title}</h4>
-                <p>{card.description}</p>
+          
+          {/* Right Column: Content */}
+          <div className="lg:col-span-8 flex flex-col justify-center">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Full-Stack Developer
+            </h3>
+            <p className="text-gray-400 leading-relaxed mb-8">
+              {personalInfo.aboutText}
+            </p>
+            
+            <h3 className="text-xl font-bold text-white mb-4">
+              Career Objective
+            </h3>
+            <p className="text-gray-400 leading-relaxed mb-10">
+              {personalInfo.careerObjective}
+            </p>
+            
+            {/* Contact Details Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-accent-DEFAULT">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 font-medium">Email</p>
+                  <a href={`mailto:${personalInfo.email}`} className="text-white hover:text-accent-DEFAULT transition-colors">
+                    {personalInfo.email}
+                  </a>
+                </div>
               </div>
-            ))}
+              
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-accent-DEFAULT">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 font-medium">Phone</p>
+                  <a href={`tel:${personalInfo.phone}`} className="text-white hover:text-accent-DEFAULT transition-colors">
+                    {personalInfo.phone}
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-accent-DEFAULT">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 font-medium">Location</p>
+                  <p className="text-white">{personalInfo.location}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-accent-DEFAULT">
+                  <GraduationCap size={20} />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 font-medium">Education</p>
+                  <p className="text-white">{personalInfo.education}</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="flex gap-4">
+              <a 
+                href="#contact"
+                className="px-6 py-3 bg-white text-dark-900 font-semibold rounded-md hover:bg-gray-200 transition-colors duration-300"
+              >
+                Hire Me
+              </a>
+              <a 
+                href="/assets/documents/Periyasamy_N_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 border border-dark-600 text-white font-semibold rounded-md hover:bg-dark-800 transition-colors duration-300"
+              >
+                Resume
+              </a>
+            </div>
           </div>
-
+          
         </div>
-
       </div>
     </section>
   );
-}
+};
+
+export default About;
