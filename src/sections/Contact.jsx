@@ -16,23 +16,60 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
-    console.log(formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    // Replace this with your Web3Forms Access Key
+    const WEB3FORMS_ACCESS_KEY = "40d06f58-8d31-4149-aeaf-18d8bf796ec5";
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          from_name: "Portfolio Contact Form",
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } else {
+        console.error(result);
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section id="contact" className="py-20 bg-dark-900 border-t border-dark-800">
+    <section id="contact" className="py-20 relative border-t border-dark-800/30">
       <div className="container mx-auto px-6 md:px-12">
         <SectionHeading 
           title="Contact Me" 
           subtitle="Get In Touch" 
         />
         
-        <p className="text-gray-400 mb-12 max-w-2xl">
+        <p className="text-gray-200 mb-12 max-w-2xl">
           Let's work together
         </p>
 
@@ -48,7 +85,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-white mb-1">Email</h4>
-                  <a href={`mailto:${personalInfo.email}`} className="text-gray-400 hover:text-accent-DEFAULT transition-colors">
+                  <a href={`mailto:${personalInfo.email}`} className="text-gray-200 hover:text-accent-DEFAULT transition-colors">
                     {personalInfo.email}
                   </a>
                 </div>
@@ -60,7 +97,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-white mb-1">Phone</h4>
-                  <a href={`tel:${personalInfo.phone}`} className="text-gray-400 hover:text-accent-DEFAULT transition-colors">
+                  <a href={`tel:${personalInfo.phone}`} className="text-gray-200 hover:text-accent-DEFAULT transition-colors">
                     {personalInfo.phone}
                   </a>
                 </div>
@@ -72,7 +109,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-white mb-1">Location</h4>
-                  <p className="text-gray-400">
+                  <p className="text-gray-200">
                     {personalInfo.location}
                   </p>
                 </div>
@@ -85,7 +122,7 @@ const Contact = () => {
                     href={personalInfo.github} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="p-3 bg-dark-900 rounded-md border border-dark-700 text-gray-300 hover:text-white hover:border-gray-500 transition-colors"
+                    className="p-3 bg-dark-900 rounded-md border border-dark-700 text-gray-100 hover:text-white hover:border-gray-500 transition-colors"
                   >
                     <FaGithub size={20} />
                   </a>
@@ -93,7 +130,7 @@ const Contact = () => {
                     href={personalInfo.linkedin} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="p-3 bg-dark-900 rounded-md border border-dark-700 text-gray-300 hover:text-[#0a66c2] hover:border-[#0a66c2]/50 transition-colors"
+                    className="p-3 bg-dark-900 rounded-md border border-dark-700 text-gray-100 hover:text-[#0a66c2] hover:border-[#0a66c2]/50 transition-colors"
                   >
                     <FaLinkedin size={20} />
                   </a>
@@ -107,9 +144,10 @@ const Contact = () => {
           <div className="lg:col-span-7">
             <div className="clean-card p-6 md:p-10 h-full">
               <form onSubmit={handleSubmit} className="space-y-6">
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium text-gray-300">Name</label>
+                    <label htmlFor="name" className="text-sm font-medium text-gray-100">Name</label>
                     <input 
                       type="text" 
                       id="name" 
@@ -122,7 +160,7 @@ const Contact = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-gray-300">Email</label>
+                    <label htmlFor="email" className="text-sm font-medium text-gray-100">Email</label>
                     <input 
                       type="email" 
                       id="email" 
@@ -137,7 +175,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium text-gray-300">Subject</label>
+                  <label htmlFor="subject" className="text-sm font-medium text-gray-100">Subject</label>
                   <input 
                     type="text" 
                     id="subject" 
@@ -151,7 +189,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium text-gray-300">Message</label>
+                  <label htmlFor="message" className="text-sm font-medium text-gray-100">Message</label>
                   <textarea 
                     id="message" 
                     name="message" 
@@ -164,12 +202,24 @@ const Contact = () => {
                   ></textarea>
                 </div>
                 
+                {submitStatus === 'success' && (
+                  <div className="p-4 rounded-md bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 mb-6 flex items-center justify-center gap-2">
+                    <span className="font-medium">Message sent successfully!</span>
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="p-4 rounded-md bg-red-500/10 border border-red-500/50 text-red-400 mb-6 flex items-center justify-center gap-2">
+                    <span className="font-medium">Oops! Please check your API key or try again.</span>
+                  </div>
+                )}
+                
                 <button 
                   type="submit" 
-                  className="w-full md:w-auto px-8 py-3 bg-white text-dark-900 font-semibold rounded-md hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full md:w-auto px-8 py-3 bg-white text-dark-900 font-semibold rounded-md hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <span>Send Message</span>
-                  <Send size={18} />
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  {!isSubmitting && <Send size={18} />}
                 </button>
               </form>
             </div>

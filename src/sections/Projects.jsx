@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import SectionHeading from '../components/SectionHeading';
 import ProjectCard from '../components/ProjectCard';
+import ProjectModal from '../components/ProjectModal';
 import { projects } from '../data/portfolioData';
 
 const Projects = () => {
   const [filter, setFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
   
   const categories = ['All', 'Full Stack', 'AI / Python', 'Systems'];
   
@@ -20,7 +22,7 @@ const Projects = () => {
           subtitle="My Work" 
         />
         
-        <p className="text-gray-400 mb-10 max-w-2xl">
+        <p className="text-gray-200 mb-10 max-w-2xl text-center mx-auto">
           Things I've built
         </p>
         
@@ -33,7 +35,7 @@ const Projects = () => {
               className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                 filter === cat 
                   ? 'bg-accent-DEFAULT text-white' 
-                  : 'bg-dark-800 text-gray-400 border border-dark-700 hover:border-gray-500 hover:text-white'
+                  : 'bg-dark-800 text-gray-200 border border-dark-700 hover:border-gray-500 hover:text-white'
               }`}
             >
               {cat}
@@ -42,7 +44,7 @@ const Projects = () => {
         </div>
         
         {/* Results count */}
-        <div className="text-center mb-8 text-gray-500 text-sm">
+        <div className="text-center mb-8 text-gray-100 text-sm">
           Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
         </div>
         
@@ -50,11 +52,19 @@ const Projects = () => {
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
             <div key={project.id} className="animate-fade-up">
-              <ProjectCard project={project} />
+              <ProjectCard 
+                project={project} 
+                onClick={() => setSelectedProject(project)} 
+              />
             </div>
           ))}
         </div>
       </div>
+
+      <ProjectModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </section>
   );
 };

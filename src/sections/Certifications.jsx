@@ -5,14 +5,14 @@ import { Award, ExternalLink } from 'lucide-react';
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-20 bg-dark-900 border-t border-dark-800">
+    <section id="certifications" className="py-20 relative border-t border-dark-800/30">
       <div className="container mx-auto px-6 md:px-12">
         <SectionHeading 
           title="My Certifications" 
           subtitle="Credentials" 
         />
         
-        <p className="text-gray-400 mb-12 max-w-2xl">
+        <p className="text-gray-200 mb-12 max-w-2xl">
           Verified achievements
         </p>
 
@@ -24,7 +24,7 @@ const Certifications = () => {
                   <Award size={24} />
                 </div>
                 {cert.badge && (
-                  <span className="inline-block px-3 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-semibold text-gray-300">
+                  <span className="inline-block px-3 py-1 bg-dark-900 border border-dark-700 rounded text-xs font-semibold text-gray-100">
                     {cert.badge}
                   </span>
                 )}
@@ -34,12 +34,12 @@ const Certifications = () => {
                 {cert.title}
               </h3>
               
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-200 text-sm mb-4">
                 {cert.issuer}
               </p>
               
               <div className="mt-auto pt-4 border-t border-dark-700 flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-500">{cert.year}</span>
+                <span className="text-sm font-medium text-gray-100">{cert.year}</span>
                 {cert.link && (
                   <a 
                     href={cert.link} 

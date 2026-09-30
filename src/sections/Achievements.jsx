@@ -5,14 +5,14 @@ import { Trophy, CheckCircle2 } from 'lucide-react';
 
 const Achievements = () => {
   return (
-    <section id="achievements" className="py-20 bg-dark-900 border-t border-dark-800">
+    <section id="achievements" className="py-20 relative border-t border-dark-800/30">
       <div className="container mx-auto px-6 md:px-12">
         <SectionHeading 
           title="My Achievements" 
           subtitle="Milestones" 
         />
         
-        <p className="text-gray-400 mb-12 max-w-2xl">
+        <p className="text-gray-200 mb-12 max-w-2xl">
           Things I'm proud of
         </p>
 
@@ -36,8 +36,8 @@ const Achievements = () => {
               <ul className="space-y-3">
                 {achievement.highlights && achievement.highlights.map((point, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-gray-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-300 text-sm leading-relaxed">{point}</span>
+                    <CheckCircle2 size={16} className="text-gray-100 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-100 text-sm leading-relaxed">{point}</span>
                   </li>
                 ))}
               </ul>

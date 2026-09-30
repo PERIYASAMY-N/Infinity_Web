@@ -4,14 +4,14 @@ import { education } from '../data/portfolioData';
 
 const Education = () => {
   return (
-    <section id="education" className="py-20 bg-dark-900 border-t border-dark-800">
+    <section id="education" className="py-20 relative border-t border-dark-800/30">
       <div className="container mx-auto px-6 md:px-12">
         <SectionHeading 
           title="My Education" 
           subtitle="Academic Background" 
         />
         
-        <p className="text-gray-400 mb-12 max-w-2xl">
+        <p className="text-gray-200 mb-12 max-w-2xl">
           My learning journey
         </p>
 
@@ -19,7 +19,7 @@ const Education = () => {
           {education.map((edu, index) => (
             <div key={index} className="clean-card p-6 md:p-8">
               <div className="flex flex-col mb-4">
-                <span className="text-sm font-medium text-gray-500 mb-2">
+                <span className="text-sm font-medium text-gray-100 mb-2">
                   {edu.duration}
                 </span>
                 <h3 className="text-xl font-bold text-white mb-1">
@@ -31,7 +31,7 @@ const Education = () => {
               </div>
               
               <div className="pt-4 mt-2 border-t border-dark-700">
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-200 text-sm">
                   {edu.score}
                 </p>
               </div>

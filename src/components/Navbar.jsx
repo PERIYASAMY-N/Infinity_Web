@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
   { name: 'Education', href: '#education' },
+  { name: 'Achievements', href: '#achievements' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -55,7 +56,7 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-dark-900/90 backdrop-blur-md border-b border-dark-700 py-3' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* Logo */}
-        <a href="#home" onClick={(e) => handleClick(e, '#home')} className="text-xl font-bold text-white tracking-wide">
+        <a href="#home" onClick={(e) => handleClick(e, '#home')} className="text-2xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-accent-light to-white">
           Periyasamy N
         </a>
 
@@ -67,7 +68,7 @@ const Navbar = () => {
                 <a
                   href={link.href}
                   onClick={(e) => handleClick(e, link.href)}
-                  className={`transition-colors duration-200 hover:text-accent-light ${activeSection === link.href.substring(1) ? 'text-accent-DEFAULT' : 'text-gray-300'}`}
+                  className={`transition-colors duration-200 hover:text-accent-light ${activeSection === link.href.substring(1) ? 'text-accent-DEFAULT' : 'text-gray-100'}`}
                 >
                   {link.name}
                 </a>
@@ -75,7 +76,7 @@ const Navbar = () => {
             ))}
           </ul>
           <a
-            href="/assets/documents/Periyasamy_N_Resume.pdf"
+            href={`${import.meta.env.BASE_URL}assets/documents/Periyasamy_N_Resume.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2 rounded-full border border-accent-DEFAULT text-accent-DEFAULT hover:bg-accent-DEFAULT hover:text-white transition-all duration-300 text-sm font-medium"
@@ -85,7 +86,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden text-gray-300 hover:text-white" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
+        <button className="lg:hidden text-gray-100 hover:text-white" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
@@ -98,7 +99,7 @@ const Navbar = () => {
               <a
                 href={link.href}
                 onClick={(e) => handleClick(e, link.href)}
-                className={`block text-lg font-medium transition-colors duration-200 ${activeSection === link.href.substring(1) ? 'text-accent-DEFAULT' : 'text-gray-300 hover:text-accent-light'}`}
+                className={`block text-lg font-medium transition-colors duration-200 ${activeSection === link.href.substring(1) ? 'text-accent-DEFAULT' : 'text-gray-100 hover:text-accent-light'}`}
               >
                 {link.name}
               </a>
@@ -106,7 +107,7 @@ const Navbar = () => {
           ))}
           <li className="pt-2 pb-4">
             <a
-              href="/assets/documents/Periyasamy_N_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}assets/documents/Periyasamy_N_Resume.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-6 py-2 rounded-full bg-accent-DEFAULT text-white font-medium hover:bg-accent-light transition-colors"

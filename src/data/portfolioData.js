@@ -11,7 +11,7 @@ export const personalInfo = {
   email: "periyasamynatchimuthu@gmail.com",
   phone: "9025214090",
   github: "https://github.com/PERIYASAMY-N",
-  linkedin: "https://www.linkedin.com/in/periyasamy-natchimuthu04",
+  linkedin: "https://www.linkedin.com/in/periyasamy-nachimuthu04",
   college: "V.S.B Engineering College, Karur",
   education: "B.Tech Information Technology",
   status: "Available for Internships & Projects",
@@ -80,62 +80,42 @@ export const skills = [
 export const projects = [
   {
     id: 1,
-    title: "AI Code Review Agent",
-    category: "AI / Python",
-    description: "An AI-powered system that analyzes user-submitted code to identify bugs, security issues, performance problems and possible improvements with detailed explanations and recommendations.",
-    image: null, // Will use placeholder if image is missing
-    technologies: ["React.js", "Monaco Editor", "FastAPI", "Python", "Groq LLM", "DeepSeek / Llama"],
-    github: "https://github.com/PERIYASAMY-N/AI_CODE_REVIEW_AGENT",
-    demo: "https://ai-code-review-agent-1-lrnm.onrender.com/"
-  },
-  {
-    id: 2,
     title: "Civic Issues Management",
     category: "Full Stack",
     description: "Developed a smart civic platform for real-time public issue reporting, tracking, and complaint management.",
-    image: null,
+    image: import.meta.env.BASE_URL + "assets/projects/civichub.jpg",
     technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Mongoose"],
     github: "https://github.com/PERIYASAMY-N/civic_management",
     demo: null
   },
   {
+    id: 2,
+    title: "AI Code Review Agent",
+    category: "AI / Python",
+    description: "An AI-powered system that analyzes user-submitted code to identify bugs, security issues, performance problems and possible improvements with detailed explanations and recommendations.",
+    image: import.meta.env.BASE_URL + "assets/projects/codereview.jpg",
+    technologies: ["React.js", "Monaco Editor", "FastAPI", "Python", "Groq LLM", "DeepSeek / Llama"],
+    github: "https://github.com/PERIYASAMY-N/AI_CODE_REVIEW_AGENT",
+    demo: "https://ai-code-review-agent-1-lrnm.onrender.com/"
+  },
+  {
     id: 3,
-    title: "AI Student Helper",
-    category: "Full Stack / AI",
-    description: "An AI-assisted academic support platform designed to help students with academic workflows and intelligent content interaction.",
-    image: null,
-    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "AI Integration"],
-    github: "https://github.com/PERIYASAMY-N/AI_Student_Helper",
-    demo: null
+    title: "Room Expense Manager",
+    category: "Full Stack",
+    description: "A comprehensive web application designed to track, manage, and split shared room expenses among roommates effectively.",
+    image: import.meta.env.BASE_URL + "assets/projects/roomexpense.png",
+    technologies: ["React.js", "Node.js", "Express.js", "MySQL", "Tailwind CSS"],
+    github: "https://github.com/PERIYASAMY-N/Room_Expense_Manager",
+    demo: "https://room-expense-manager-three.vercel.app/"
   },
   {
     id: 4,
-    title: "AI Career Intelligence System",
-    category: "AI / Python",
-    description: "An AI-powered career assistance application for document analysis and intelligent career guidance.",
-    image: null,
-    technologies: ["React.js", "FastAPI", "Python", "PDF Processing", "Machine Learning"],
-    github: null,
-    demo: null
-  },
-  {
-    id: 5,
-    title: "Smart Gate System",
-    category: "Systems",
-    description: "A smart security monitoring application integrating computer vision, real-time monitoring and administrative workflows.",
-    image: null,
-    technologies: ["React.js", "Python", "Computer Vision", "Database", "Real-time Monitoring"],
-    github: "https://github.com/PERIYASAMY-N/smart_gate_system",
-    demo: null
-  },
-  {
-    id: 6,
-    title: "Smart Production Scheduling",
-    category: "AI / Systems",
-    description: "An intelligent production scheduling concept designed to optimize manufacturing schedules using AI-driven decision making and operational constraints.",
-    image: null,
-    technologies: ["AI", "Python", "Optimization", "React.js"],
-    github: null,
+    title: "E-Commerce Website with Data Analysis",
+    category: "Full Stack / Data",
+    description: "An integrated e-commerce platform that handles online sales and provides insightful data analysis on customer behavior and sales trends.",
+    image: import.meta.env.BASE_URL + "assets/projects/ecommerce.jpg",
+    technologies: ["React.js", "Python", "Data Analytics", "Node.js", "MongoDB"],
+    github: "https://github.com/PERIYASAMY-N/E-commerce_with_Data-Analysis",
     demo: null
   }
 ];
